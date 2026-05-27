@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card form-card">
+
+  <h2 style="margin-bottom:20px;">
+    ✏️ Editar miembro
+  </h2>
+
+  <form method="POST">
+
+    <div class="input-group">
+      <label>Nombre</label>
+
+      <input
+        type="text"
+        name="nombre"
+        value="{{ miembro.nombre }}"
+        required
+      >
+    </div>
+
+    <div class="input-group">
+      <label>Correo</label>
+
+      <input
+        type="email"
+        name="email"
+        value="{{ miembro.email }}"
+        required
+      >
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      Guardar cambios
+    </button>
+
+  </form>
+
+</div>
+
+{% endblock %}

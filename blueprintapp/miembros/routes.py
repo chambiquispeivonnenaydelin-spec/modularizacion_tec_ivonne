@@ -28,6 +28,41 @@ def create():
         # Redireccion al listado de miembros
         return redirect(url_for('bp_miembro.index'))
         
-        
+@bp_miembro.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+
+    miembro = Miembro.query.get_or_404(id)
+
+    if request.method == 'POST':
+
+        miembro.nombre = request.form['nombre']
+        miembro.email = request.form['email']
+
+        db.session.commit()
+
+        return redirect(url_for('bp_miembro.index'))
+
+    return render_template(
+        'miembro/edit.html',
+        miembro=miembro
+    )
 
 
+
+@bp_miembro.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete(id):
+
+    miembro = Miembro.query.get_or_404(id)
+
+    if request.method == 'POST':
+
+        db.session.delete(miembro)
+
+        db.session.commit()
+
+        return redirect(url_for('bp_miembro.index'))
+
+    return render_template(
+        'miembro/delete.html',
+        miembro=miembro
+    )

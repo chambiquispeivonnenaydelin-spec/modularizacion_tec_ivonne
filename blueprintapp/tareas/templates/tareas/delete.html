@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:70vh;
+">
+
+  <div class="card form-card" style="text-align:center; max-width:450px; width:100%;">
+
+    <h2>🗑 Eliminar tarea</h2>
+
+    <p style="margin-bottom:25px;">
+      ¿Seguro que deseas eliminar:
+      <strong>{{ tarea.titulo }}</strong>?
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:15px;">
+
+      <form method="POST">
+        <button type="submit" class="btn btn-danger">
+          Sí, eliminar
+        </button>
+      </form>
+
+      <a href="{{ url_for('bp_tarea.index') }}" class="btn btn-primary">
+        Cancelar
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

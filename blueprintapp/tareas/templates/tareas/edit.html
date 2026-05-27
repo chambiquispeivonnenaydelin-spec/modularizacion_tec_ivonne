@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Editar tarea{% endblock %}
+
+{% block content %}
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:70vh;
+">
+
+  <div class="card form-card" style="width:100%; max-width:500px;">
+
+    <h2 style="margin-bottom:20px;">
+      ✏️ Editar tarea
+    </h2>
+
+    <form method="POST">
+
+      <div class="input-group">
+        <label>Descripción</label>
+
+        <input type="text"
+               name="descripcion"
+               value="{{ tarea.descripcion }}"
+               required>
+      </div>
+
+      <div class="input-group">
+
+        <label>Estado</label>
+
+        <select name="completado">
+
+          <option value="0"
+            {% if not tarea.completado %}selected{% endif %}>
+            Pendiente
+          </option>
+
+          <option value="1"
+            {% if tarea.completado %}selected{% endif %}>
+            Completado
+          </option>
+
+        </select>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Guardar cambios
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

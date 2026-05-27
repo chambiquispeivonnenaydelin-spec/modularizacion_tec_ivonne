@@ -1,15 +1,102 @@
 {% extends "base.html" %}
 
-{% block content%}
-<h1>Listado de miembros</h1>
-<a href="{{ url_for('bp_miembro.create') }}">Nuevo miembro </a>
+{% block title %}Miembros{% endblock %}
 
-<ul>
-    {% for item in miembros %}
-    <li>Nombre: {{ item.nombre}} Email: {{ item.email }}</li>
-    {% else %}
-    <li>No hay miembros</li>
-    {% endfor %}
-</ul>
+{% block content %}
+
+<div class="card">
+
+  <!-- HEADER -->
+
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+  ">
+
+    <div>
+
+      <h2 style="margin-bottom:8px;">
+        👥 Lista de miembros
+      </h2>
+
+      <p style="color:#94a3b8;">
+        Gestiona los usuarios del sistema
+      </p>
+
+    </div>
+
+    <a href="/miembros/create"
+       class="btn btn-primary">
+
+       + Nuevo miembro
+
+    </a>
+
+  </div>
+
+  <!-- TABLA -->
+
+  <div class="table-responsive">
+
+    <table class="modern-table">
+
+      <thead>
+
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {% for miembro in miembros %}
+
+        <tr>
+
+          <td>{{ miembro.id }}</td>
+
+          <td>{{ miembro.nombre }}</td>
+
+          <td>{{ miembro.email }}</td>
+
+          <td>
+
+            <div class="actions">
+
+              <a href="{{ url_for('bp_miembro.edit', id=miembro.id) }}"
+                 class="btn btn-warning">
+
+                 Editar
+
+              </a>
+
+              <a href="{{ url_for('bp_miembro.delete', id=miembro.id) }}"
+                 class="btn btn-danger">
+
+                 Eliminar
+
+              </a>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
 
 {% endblock %}

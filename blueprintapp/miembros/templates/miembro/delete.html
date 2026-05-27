@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:70vh;
+">
+
+  <div class="card form-card" style="
+    text-align:center;
+    max-width:450px;
+    width:100%;
+  ">
+
+    <h2 style="margin-bottom:15px;">
+      🗑 Eliminar miembro
+    </h2>
+
+    <p style="
+      color:#cbd5e1;
+      margin-bottom:30px;
+    ">
+      ¿Seguro que deseas eliminar a:
+
+      <strong style="color:white;">
+        {{ miembro.nombre }}
+      </strong>?
+    </p>
+
+    <div style="
+      display:flex;
+      justify-content:center;
+      gap:15px;
+    ">
+
+      <form method="POST">
+
+        <button type="submit"
+                class="btn btn-danger">
+          Sí, eliminar
+        </button>
+
+      </form>
+
+      <a href="{{ url_for('bp_miembro.index') }}"
+         class="btn btn-primary">
+
+        Cancelar
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

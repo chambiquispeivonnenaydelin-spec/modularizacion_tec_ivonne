@@ -1,15 +1,132 @@
 {% extends "base.html" %}
 
-{% block content%}
-<h1>Listado de tareas</h1>
-<a href="{{ url_for('bp_tarea.create') }}">Nueva tarea </a>
+{% block title %}Tareas{% endblock %}
 
-<ul>
-    {% for item in tareas %}
-    <li>Tarea: {{ item.descripcion}} Completado: {{ item.completado }}</li>
-    {% else %}
-    <li>No hay tareas</li>
-    {% endfor %}
-</ul>
+{% block content %}
+
+<div style="
+width:100%;
+display:flex;
+justify-content:center;
+">
+
+  <div class="card" style="
+  width:100%;
+  max-width:1000px;
+  ">
+
+    <!-- HEADER -->
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+    ">
+
+      <div>
+        <h2>📋 Listado de tareas</h2>
+
+        <p style="
+        color:#94a3b8;
+        margin-top:6px;
+        ">
+          Gestiona todas las tareas del sistema
+        </p>
+      </div>
+
+      <a href="{{ url_for('bp_tarea.create') }}"
+         class="btn btn-primary">
+
+         + Nueva tarea
+
+      </a>
+
+    </div>
+
+    <!-- TABLA -->
+
+    <div class="table-responsive">
+
+      <table class="modern-table">
+
+        <thead>
+
+          <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {% for tarea in tareas %}
+
+          <tr>
+
+            <td>{{ tarea.id }}</td>
+
+            <td>
+              {{ tarea.descripcion }}
+            </td>
+
+            <td>
+
+              {% if tarea.completado %}
+
+                <span class="status completed">
+                  ✅ Completado
+                </span>
+
+              {% else %}
+
+                <span class="status pending">
+                  ⏳ Pendiente
+                </span>
+
+              {% endif %}
+
+            </td>
+
+            <!-- ACCIONES CORREGIDAS -->
+
+            <td>
+
+              <div class="actions" style="display:flex; gap:10px;">
+
+                <a href="{{ url_for('bp_tarea.edit', id=tarea.id) }}"
+                   class="btn btn-warning">
+
+                  ✏️ Editar
+
+                </a>
+
+                <a href="{{ url_for('bp_tarea.delete', id=tarea.id) }}"
+                   class="btn btn-danger">
+
+                  🗑 Eliminar
+
+                </a>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
 
 {% endblock %}

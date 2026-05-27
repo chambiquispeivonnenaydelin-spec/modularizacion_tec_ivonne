@@ -1,9 +1,88 @@
 {% extends 'base.html' %}
 
+{% block title %}Inicio{% endblock %}
+
 {% block content %}
-<h1>Home Page</h1>
-<ul>
-    <li><a href="{{ url_for('bp_miembro.index') }}">Miembros</a></li>
-    <li><a href="{{ url_for('bp_tarea.index') }}">Tareas</a></li>
-</ul>
-{% endblock%}
+
+<div class="hero">
+
+  <span>
+    SISTEMA MODULAR
+  </span>
+
+  <h1>
+    Administra tareas y miembros
+    desde un único panel
+  </h1>
+
+  <p>
+    Interfaz minimalista construida con Flask Blueprints,
+    diseño limpio y totalmente centrado.
+  </p>
+
+  <div class="buttons">
+
+    <a href="{{ url_for('bp_miembro.index') }}"
+       class="btn btn-primary">
+       👥 Miembros
+    </a>
+
+    <a href="{{ url_for('bp_tarea.index') }}"
+       class="btn btn-light">
+       📋 Tareas
+    </a>
+
+  </div>
+
+</div>
+
+<div class="cards">
+
+  <div class="card">
+
+    <div class="card-icon">
+      👥
+    </div>
+
+    <h3>Miembros</h3>
+
+    <p>
+      Gestiona usuarios y equipos
+      de forma rápida y organizada.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-icon">
+      📋
+    </div>
+
+    <h3>Tareas</h3>
+
+    <p>
+      Organiza actividades,
+      pendientes y proyectos.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-icon">
+      ⚡
+    </div>
+
+    <h3>Rendimiento</h3>
+
+    <p>
+      Sistema ligero y modular
+      usando Flask Blueprints.
+    </p>
+
+  </div>
+
+</div>
+
+{% endblock %}
