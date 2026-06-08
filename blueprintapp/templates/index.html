@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div style="text-align: center; padding: 2rem;">
+        <h1>Bienvenido a BlueprintHub</h1>
+        <p style="margin-top: 1rem; color: #cbd5e1;">
+            Sistema de gestión de miembros y tareas
+        </p>
+        
+        {% if current_user.is_authenticated %}
+            <div style="margin-top: 2rem;">
+                <a href="{{ url_for('bp_miembro.index') }}" class="btn btn-primary">Ver Miembros</a>
+                <a href="{{ url_for('bp_tarea.index') }}" class="btn btn-primary">Ver Tareas</a>
+            </div>
+        {% else %}
+            <div style="margin-top: 2rem;">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Registrarse</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

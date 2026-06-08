@@ -1,9 +1,17 @@
-from flask import request, render_template, redirect, url_for, Blueprint
+from flask import render_template, redirect, url_for, flash, request
+from flask_login import login_required, current_user
+from . import main_bp
 
-from blueprintapp.app import db
 
-bp_core = Blueprint('bp_core',__name__,template_folder='templates')
-
-@bp_core.route("/")
+# Ruta de inicio (pública)
+@main_bp.route('/')
 def index():
-    return render_template('core/index.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('miembros.index'))
+    return render_template('index.html')
+
+# Dashboard protegido
+@main_bp.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html', user=current_user)

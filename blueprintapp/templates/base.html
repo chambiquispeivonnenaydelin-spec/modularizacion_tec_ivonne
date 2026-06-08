@@ -100,6 +100,7 @@
     .nav-links{
       display:flex;
       gap:2rem;
+      align-items:center;
     }
 
     .nav-links a{
@@ -111,6 +112,11 @@
 
     .nav-links a:hover{
       color:white;
+    }
+
+    .user-name{
+      color:#8b5cf6;
+      font-weight:500;
     }
 
     /* MAIN */
@@ -298,6 +304,39 @@
       border-color:#8b5cf6;
     }
 
+    /* FLASH MESSAGES */
+
+    .alert{
+      padding:12px 20px;
+      border-radius:12px;
+      margin-bottom:20px;
+      font-weight:500;
+    }
+
+    .alert-success{
+      background:rgba(34,197,94,0.2);
+      border:1px solid #22c55e;
+      color:#22c55e;
+    }
+
+    .alert-danger{
+      background:rgba(239,68,68,0.2);
+      border:1px solid #ef4444;
+      color:#ef4444;
+    }
+
+    .alert-warning{
+      background:rgba(245,158,11,0.2);
+      border:1px solid #f59e0b;
+      color:#f59e0b;
+    }
+
+    .alert-info{
+      background:rgba(59,130,246,0.2);
+      border:1px solid #3b82f6;
+      color:#3b82f6;
+    }
+
     /* FOOTER */
 
     footer{
@@ -327,10 +366,15 @@
       .modern-table{
         min-width:700px;
       }
+      
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
     }
     .card h2{
-  font-size:1.2rem;
-}
+      font-size:1.2rem;
+    }
   </style>
 
 </head>
@@ -354,9 +398,17 @@
     </div>
 
     <div class="nav-links">
-      <a href="{{ url_for('bp_core.index') }}">Inicio</a>
+      <a href="{{ url_for('bp_miembro.index') }}">Inicio</a>
       <a href="{{ url_for('bp_miembro.index') }}">Miembros</a>
       <a href="{{ url_for('bp_tarea.index') }}">Tareas</a>
+      
+      {% if current_user.is_authenticated %}
+        <span class="user-name">👋 Hola, {{ current_user.username }}</span>
+        <a href="{{ url_for('auth.logout') }}">🚪 Cerrar Sesión</a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}">🔐 Iniciar Sesión</a>
+        <a href="{{ url_for('auth.register') }}">📝 Registrarse</a>
+      {% endif %}
     </div>
 
   </nav>
@@ -366,6 +418,17 @@
   <div class="container">
 
     <div class="content">
+
+      <!-- FLASH MESSAGES -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
 
       {% block content %}
       {% endblock %}
